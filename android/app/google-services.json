@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "109068512337",
+    "project_id": "lokaldanus",
+    "storage_bucket": "lokaldanus.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:109068512337:android:3498153531f955a9a29c70",
+        "android_client_info": {
+          "package_name": "com.lokaldanus"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "109068512337-s5a7tli3fv9v541a4j9kb2mvrq84lg6i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.lokaldanus",
+            "certificate_hash": "be5fd91e8c275835fae4f540643abd5c008ad30b"
+          }
+        },
+        {
+          "client_id": "109068512337-9bvi7u3tm123pdjhh65gct9a34km4cjk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBCkvu6aqGUIixQL4o86-OpD2UIbBY7OFc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "109068512337-9bvi7u3tm123pdjhh65gct9a34km4cjk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
