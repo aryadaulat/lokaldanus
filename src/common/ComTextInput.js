@@ -3,8 +3,8 @@ import React from 'react';
 
 const ComTextInput = ({name, value, onChangeText, placeholder, icon, type}) => {
   return (
-    <View style={{marginTop:20}}>
-      <Text style={{marginLeft:30, fontWeight:'bold'}}>{name}</Text>
+    <View style={{marginTop: 20}}>
+      <Text style={{marginLeft: 30, fontWeight: 'bold'}}>{name}</Text>
       <View
         style={{
           width: '85%',
@@ -20,6 +20,8 @@ const ComTextInput = ({name, value, onChangeText, placeholder, icon, type}) => {
         }}>
         <Image source={icon} style={{width: 30, height: 30}} />
         <TextInput
+          value={value}
+          onChangeText={onChangeText}
           placeholder={placeholder}
           secureTextEntry={type ? true : false}
           style={{marginLeft: 10}}
