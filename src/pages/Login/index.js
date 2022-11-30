@@ -1,36 +1,14 @@
 import {View, Text, Image} from 'react-native';
-import React, {useState} from 'react';
+import React from 'react';
 import ComTextInput from '../../common/ComTextInput';
 import ComButton from '../../common/ComButton';
 import {useNavigation} from '@react-navigation/native';
-import auth from '@react-native-firebase/auth';
 
 const Login = () => {
   const navigation = useNavigation();
-  const [email, onChangeEmail] = useState('');
-  const [password, onChangePassword] = useState('');
-
-  const Loginakun = async () => {
-    auth()
-      .signInWithEmailAndPassword(email, password)
-      .then(() => {
-        navigation.navigate('Home');
-      })
-      .catch(error => {
-        if (error.code === 'auth/email-already-in-use') {
-          console.log('That email address is already in use!');
-        }
-
-        if (error.code === 'auth/invalid-email') {
-          console.log('That email address is invalid!');
-        }
-
-        console.error(error);
-      });
-  };
   return (
-    <View style={{flex: 1}}>
-      <View>
+    <View style={{flex:1}}>
+      <View >
         <Image
           source={require('../../images/Logo.png')}
           style={{width: 100, height: 100, alignSelf: 'center', marginTop: 70}}
@@ -60,15 +38,11 @@ const Login = () => {
             elevation: 5,
           }}>
           <ComTextInput
-            value={email}
-            onChangeText={onChangeEmail}
             style={{marginTop: 10}}
             placeholder={'Enter Email'}
             name={'Email :'}
           />
           <ComTextInput
-            value={password}
-            onChangeText={onChangePassword}
             placeholder={'Enter Password'}
             name={'Password :'}
             type={'password'}
@@ -77,7 +51,7 @@ const Login = () => {
             title={'Login'}
             bgColor={'#f3c10d'}
             textColor={'#ffff'}
-            onPress={Loginakun}
+            onPress={() => {navigation.navigate('Home')}}
           />
         </View>
       </View>
@@ -96,15 +70,6 @@ const Login = () => {
       </Text>
       <Text
         style={{
-          fontSize: 10,
-          fontWeight: '800',
-          alignSelf: 'center',
-          marginTop: 20,
-        }}>
-        Or
-      </Text>
-      <Text
-        style={{
           fontSize: 20,
           fontWeight: '800',
           alignSelf: 'center',
@@ -112,10 +77,15 @@ const Login = () => {
           textDecorationLine: 'underline',
         }}
         onPress={() => {
-          navigation.navigate('Admin');
+          navigation.navigate('SplashAdmin');
         }}>
         Login As Administrator ?
       </Text>
+      <Text style={{fontSize: 10,
+          fontWeight: '800',
+          alignSelf: 'center',
+          marginTop: 20}}>Or</Text>
+      
     </View>
   );
 };
