@@ -1,13 +1,12 @@
 import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {Home, Splash, Login, SignUp,SplashAdmin, Admin, ProfileAdmin} from '../pages';
+import {Home, Splash, Login, SignUp} from '../pages';
 import SignUp2 from '../pages/SignUp/SignUp2';
 import Keranjang from '../pages/navPage/Keranjang';
 import CheckOut from '../pages/navPage/CheckOut';
 import Payment from '../pages/navPage/Payment';
 import Detail from '../pages/navPage/Detail';
-import CekPesanan from '../pages/ProfileAdmin/CekPesanan';
 const Stack = createNativeStackNavigator();
 
 const Router = () => {
@@ -15,7 +14,7 @@ const Router = () => {
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{headerShown: false}}
-        initialRouteName="Splash">
+        initialRouteName="Login">
         <Stack.Screen
           name="Home"
           component={Home}
@@ -24,21 +23,6 @@ const Router = () => {
         <Stack.Screen
           name="Login"
           component={Login}
-          options={{title: 'Welcome'}}
-        />
-        <Stack.Screen
-          name="SplashAdmin"
-          component={SplashAdmin}
-          options={{title: 'Welcome'}}
-        />
-        <Stack.Screen
-          name="Admin"
-          component={Admin}
-          options={{title: 'Welcome'}}
-        />
-        <Stack.Screen
-          name="ProfileAdmin"
-          component={ProfileAdmin}
           options={{title: 'Welcome'}}
         />
         <Stack.Screen
@@ -71,12 +55,6 @@ const Router = () => {
           component={Detail}
           options={{title: 'Welcome'}}
         />
-        <Stack.Screen
-          name="CekPesanan"
-          component={CekPesanan}
-          options={{title: 'Welcome'}}
-        />
-        
         <Stack.Screen name="Splash" component={Splash} />
       </Stack.Navigator>
     </NavigationContainer>

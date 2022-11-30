@@ -3,14 +3,36 @@ import React, {useState} from 'react';
 import ComTextInput from '../../common/ComTextInput';
 import ComButton from '../../common/ComButton';
 import {useNavigation} from '@react-navigation/native';
+import auth from '@react-native-firebase/auth';
 
 const SignUp = () => {
+	const navigation = useNavigation();
   const [nama, onChangeNama] = useState('');
   const [email, onChangeEmail] = useState('');
-  const [phone, onChangePhone] = useState('');
   const [password, onChangePassword] = useState('');
+  const createUser = async () => {
+    auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then(() => {
+        const update = {
+          displayName: nama,
+          photoURL: '',
+        };
+        auth().currentUser.updateProfile(update);
+        navigation.navigate('SignUp2');
+      })
+      .catch(error => {
+        if (error.code === 'auth/email-already-in-use') {
+          console.log('That email address is already in use!');
+        }
 
-  const navigation = useNavigation();
+        if (error.code === 'auth/invalid-email') {
+          console.log('That email address is invalid!');
+        }
+
+        console.error(error);
+      });
+  };
   return (
     <ScrollView style={{flex: 1}} showsVerticalScrollIndicator={false}>
       <View style={{flex: 1}}>
@@ -64,13 +86,7 @@ const SignUp = () => {
             placeholder={'Enter Your Email'}
             name={'Email :'}
           />
-          <ComTextInput
-            value={phone}
-            onChangeText={onChangePhone}
-            style={{marginTop: 10}}
-            placeholder={'Enter Your Number Phone'}
-            name={'Number Phone :'}
-          />
+          
           <ComTextInput
             value={password}
             onChangeText={onChangePassword}
@@ -82,9 +98,7 @@ const SignUp = () => {
             title={'Continue'}
             bgColor={'#f3c10d'}
             textColor={'#ffff'}
-            onPress={() => {
-              navigation.navigate('SignUp2');
-            }}
+            onPress={createUser}
           />
         </View>
       </View>
