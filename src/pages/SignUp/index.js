@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import {View, Text, Image, ScrollView} from 'react-native';
 import React, {useState} from 'react';
 import ComTextInput from '../../common/ComTextInput';
@@ -6,10 +7,10 @@ import {useNavigation} from '@react-navigation/native';
 import auth from '@react-native-firebase/auth';
 
 const SignUp = () => {
-	const navigation = useNavigation();
+  const navigation = useNavigation();
   const [nama, onChangeNama] = useState('');
-  const [email, onChangeEmail] = useState('');
   const [password, onChangePassword] = useState('');
+  const [email, onChangeEmail] = useState('');
   const createUser = async () => {
     auth()
       .createUserWithEmailAndPassword(email, password)
@@ -86,7 +87,7 @@ const SignUp = () => {
             placeholder={'Enter Your Email'}
             name={'Email :'}
           />
-          
+
           <ComTextInput
             value={password}
             onChangeText={onChangePassword}
