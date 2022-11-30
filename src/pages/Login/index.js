@@ -1,8 +1,8 @@
-import {View, Text, Image} from 'react-native';
-import React, {useState} from 'react';
+import { View, Text, Image, ScrollView } from 'react-native';
+import React, { useState } from 'react';
 import ComTextInput from '../../common/ComTextInput';
 import ComButton from '../../common/ComButton';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import auth from '@react-native-firebase/auth';
 
 const Login = () => {
@@ -29,6 +29,7 @@ const Login = () => {
       });
   };
   return (
+    <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
     <View style={{flex: 1}}>
       <View>
         <Image
@@ -109,14 +110,16 @@ const Login = () => {
           fontWeight: '800',
           alignSelf: 'center',
           marginTop: 20,
+          marginBottom:50,
           textDecorationLine: 'underline',
         }}
         onPress={() => {
-          navigation.navigate('Admin');
+          navigation.navigate('SplashAdmin');
         }}>
         Login As Administrator ?
       </Text>
     </View>
+    </ScrollView>
   );
 };
 
