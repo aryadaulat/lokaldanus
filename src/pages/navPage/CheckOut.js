@@ -115,7 +115,7 @@ const CheckOut = () => {
             justifyContent: 'space-between',
             alignItems: 'center',
             width: '80%',
-            height: 40,
+            marginTop:20
           }}>
           <Text style={{fontSize: 20, fontWeight: 'bold', color: '#000'}}>
             Total Harga :

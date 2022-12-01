@@ -56,7 +56,7 @@ const Keranjang = () => {
         <Image source={require('../../images/Delete.png')} />
       </View>
       <View style={{position: 'absolute',bottom:0, height:150, width:'100%', alignItems:'center', backgroundColor:'#fff'}}>
-        <View style={{flexDirection:'row', justifyContent:'space-between', alignItems:'center', width:'80%', height:40}}>
+        <View style={{flexDirection:'row', justifyContent:'space-between', alignItems:'center', width:'80%', marginTop:20}}>
             <Text style={{fontSize:20,fontWeight:'bold', color:"#000"}}>Total Harga :</Text>
             <Text style={{fontSize:20,fontWeight:'bold', color:"#000"}}>Rp.{'135.000'}</Text>
         </View>
