@@ -1,29 +1,19 @@
-/* eslint-disable prettier/prettier */
 import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {
-  Home,
-  Splash,
-  Login,
-  SignUp,
-  SplashAdmin,
-  LoginAdmin,
-  ProfileAdmin,
-  SignOut,
-} from '../pages';
+import {Home, Splash, Login, SignUp, SplashAdmin, LoginAdmin, ProfileAdmin, SignOut} from '../pages';
 import SignUp2 from '../pages/SignUp/SignUp2';
 import Keranjang from '../pages/navPage/Keranjang';
 import CheckOut from '../pages/navPage/CheckOut';
 import Payment from '../pages/navPage/Payment';
 import Detail from '../pages/navPage/Detail';
-import EditProfil from '../pages/navPage/EditProfil';
-import UbahKataSandi from '../pages/navPage/UbahKataSandi';
 import CekPesanan from '../pages/ProfileAdmin/CekPesanan';
 import TambahProduk from '../pages/ProfileAdmin/TambahProduk';
 import HapusProduk from '../pages/ProfileAdmin/HapusProduk';
 import EditProduk from '../pages/ProfileAdmin/EditProduk';
-import signOut from '../pages/ProfileAdmin/SignOut';
+import TambahProduk2 from '../pages/ProfileAdmin/TambahProduk2';
+import EditProduk2 from '../pages/ProfileAdmin/EditProduk2';
+import EditProduk3 from '../pages/ProfileAdmin/EditProduk3';
 
 const Stack = createNativeStackNavigator();
 
@@ -68,7 +58,7 @@ const Router = () => {
           component={SignUp2}
           options={{title: 'Welcome'}}
         />
-        <Stack.Screen
+         <Stack.Screen
           name="Keranjang"
           component={Keranjang}
           options={{title: 'Welcome'}}
@@ -78,7 +68,7 @@ const Router = () => {
           component={CheckOut}
           options={{title: 'Welcome'}}
         />
-        <Stack.Screen
+         <Stack.Screen
           name="Payment"
           component={Payment}
           options={{title: 'Welcome'}}
@@ -86,16 +76,6 @@ const Router = () => {
         <Stack.Screen
           name="Detail"
           component={Detail}
-          options={{title: 'Welcome'}}
-        />
-        <Stack.Screen
-          name="EditProfil"
-          component={EditProfil}
-          options={{title: 'Welcome'}}
-        />
-        <Stack.Screen
-          name="UbahKataSandi"
-          component={UbahKataSandi}
           options={{title: 'Welcome'}}
         />
         <Stack.Screen
@@ -109,6 +89,11 @@ const Router = () => {
           options={{title: 'Welcome'}}
         />
         <Stack.Screen
+          name="TambahProduk2"
+          component={TambahProduk2}
+          options={{title: 'Welcome'}}
+        />
+        <Stack.Screen
           name="HapusProduk"
           component={HapusProduk}
           options={{title: 'Welcome'}}
@@ -116,6 +101,16 @@ const Router = () => {
         <Stack.Screen
           name="EditProduk"
           component={EditProduk}
+          options={{title: 'Welcome'}}
+        />
+        <Stack.Screen
+          name="EditProduk2"
+          component={EditProduk2}
+          options={{title: 'Welcome'}}
+        />
+        <Stack.Screen
+          name="EditProduk3"
+          component={EditProduk3}
           options={{title: 'Welcome'}}
         />
         <Stack.Screen
@@ -130,3 +125,4 @@ const Router = () => {
   );
 };
 export default Router;
+
