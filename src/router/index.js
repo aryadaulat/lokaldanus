@@ -32,7 +32,7 @@ const Router = () => {
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{headerShown: false}}
-        initialRouteName="Home">
+        initialRouteName="Login">
         <Stack.Screen
           name="Home"
           component={Home}
