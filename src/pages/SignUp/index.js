@@ -79,6 +79,7 @@ const SignUp = () => {
             style={{marginTop: 10}}
             placeholder={'Enter Your Name'}
             name={'Nama :'}
+            icon ={require('../../images/id-card.png')}
           />
           <ComTextInput
             value={email}
@@ -86,6 +87,7 @@ const SignUp = () => {
             style={{marginTop: 10}}
             placeholder={'Enter Your Email'}
             name={'Email :'}
+            icon ={require('../../images/mail.png')}
           />
 
           <ComTextInput
@@ -94,6 +96,7 @@ const SignUp = () => {
             placeholder={'Enter Password'}
             name={'Password :'}
             type={'password'}
+            icon ={require('../../images/padlock.png')}
           />
           <ComButton
             title={'Continue'}

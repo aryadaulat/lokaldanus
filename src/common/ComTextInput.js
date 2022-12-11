@@ -18,7 +18,7 @@ const ComTextInput = ({name, value, onChangeText, placeholder, icon, type}) => {
           paddingLeft: 20,
           paddingRight: 20,
         }}>
-        <Image source={icon} style={{width: 30, height: 30}} />
+        <Image source={icon} style={{width: 28, height: 28, opacity:0.5}} />
         <TextInput
           value={value}
           onChangeText={onChangeText}

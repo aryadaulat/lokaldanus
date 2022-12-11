@@ -10,6 +10,7 @@ const History = () => {
           alignItems: 'center',
           width: '100%',
           height: 100,
+          backgroundColor: '#f3c10d'
         }}>
         <Text style={{fontSize: 28, fontWeight: 'bold', color: '#000'}}>
           History
@@ -30,6 +31,7 @@ const History = () => {
           shadowOpacity: 1,
           shadowRadius: 5,
           elevation: 10,
+          marginTop:20
         }}>
         <Image source={require('../../images/Jas_Lab.png')} />
         <View>

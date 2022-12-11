@@ -12,6 +12,7 @@ const Whislist = () => {
           alignItems: 'center',
           width: '100%',
           height: 100,
+          backgroundColor: '#f3c10d'
         }}>
         <Text style={{fontSize: 28, fontWeight: 'bold', color: '#000'}}>
           Whislist

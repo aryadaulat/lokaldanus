@@ -72,6 +72,7 @@ const Login = () => {
               style={{marginTop: 10}}
               placeholder={'Enter Email'}
               name={'Email :'}
+              icon ={require('../../images/mail.png')}
             />
             <ComTextInput
               value={password}
@@ -79,6 +80,7 @@ const Login = () => {
               placeholder={'Enter Password'}
               name={'Password :'}
               type={'password'}
+              icon ={require('../../images/padlock.png')}
             />
             <ComButton
               title={'Login'}
