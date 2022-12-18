@@ -111,7 +111,7 @@ const HapusProduk = () => {
           }}></View>
         <ComButton
           title={'Simpan'}
-          onPress={() => console.log(data)}
+          onPress={() => navigation.navigate('ProfileAdmin')}
           bgColor={'#f3c10d'}
           textColor={'#fff'}
         />
