@@ -2,7 +2,7 @@ import {View, Text} from 'react-native';
 import React from 'react';
 import {SelectList} from 'react-native-dropdown-select-list';
 
-const ComDropList = ({name}) => {
+const ComDropList = ({name, values}) => {
   const [selected, setSelected] = React.useState('');
 
   const data = [
@@ -16,16 +16,17 @@ const ComDropList = ({name}) => {
   ];
   return (
     <View style={{marginTop: 20}}>
-      <Text style={{marginLeft: 30, marginBottom:5, fontWeight: 'bold'}}>{name}</Text>
-      
-        <SelectList
-          style={{}}
-          setSelected={val => setSelected(val)}
-          data={data}
-          save="value"
-          boxStyles={{marginHorizontal:22}}
-        />
+      <Text style={{marginLeft: 30, marginBottom: 5, fontWeight: 'bold'}}>
+        {name}
+      </Text>
 
+      <SelectList
+        style={{}}
+        setSelected={values}
+        data={data}
+        save="value"
+        boxStyles={{marginHorizontal: 22}}
+      />
     </View>
   );
 };
