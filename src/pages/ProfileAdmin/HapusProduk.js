@@ -12,7 +12,6 @@ import {useNavigation} from '@react-navigation/native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import ComButton from '../../common/ComButton';
 import firestore from '@react-native-firebase/firestore';
-import storage from '@react-native-firebase/storage';
 
 const HapusProduk = () => {
   const navigation = useNavigation();
@@ -20,7 +19,7 @@ const HapusProduk = () => {
 
   useEffect(() => {
     async function fetchdata() {
-      const subscriber = await firestore()
+      await firestore()
         .collection('Produk')
         .get()
         .then(querySnapshot => {
