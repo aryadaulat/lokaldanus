@@ -6,13 +6,13 @@ const ComDropList = ({name, values}) => {
   const [selected, setSelected] = React.useState('');
 
   const data = [
-    {key: '1', value: 'Mobiles'},
-    {key: '2', value: 'Appliances'},
-    {key: '3', value: 'Cameras'},
-    {key: '4', value: 'Computers'},
-    {key: '5', value: 'Vegetables'},
-    {key: '6', value: 'Diary Products'},
-    {key: '7', value: 'Drinks'},
+    {key: '1', value: 'Makanan'},
+    {key: '2', value: 'Pakaian'},
+    {key: '3', value: 'Buku'},
+    {key: '4', value: 'Minuman'},
+    {key: '5', value: 'Mercendies'},
+    {key: '6', value: 'Elektronik'},
+    {key: '7', value: 'Other'},
   ];
   return (
     <View style={{marginTop: 20}}>

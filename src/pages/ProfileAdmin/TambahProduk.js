@@ -171,6 +171,7 @@ const TambahProduk = () => {
           style={{marginTop: 10}}
           placeholder={'Nama Produk'}
           name={'Nama :'}
+          icon ={require('../../images/product.png')}
         />
         <ComTextInput
           value={harga}
@@ -178,6 +179,7 @@ const TambahProduk = () => {
           style={{marginTop: 10}}
           placeholder={'Harga dalam Rupiah'}
           name={'Harga :'}
+          icon ={require('../../images/bookmark.png')}
         />
         <ComDropList name={'Kategori'} values={onChangeCategory} />
 
@@ -187,6 +189,7 @@ const TambahProduk = () => {
           style={{marginTop: 10}}
           placeholder={'Jenis Barang'}
           name={'Jenis :'}
+          icon ={require('../../images/tag.png')}
         />
         <ComTextInput
           value={berat}
@@ -194,6 +197,7 @@ const TambahProduk = () => {
           style={{marginTop: 10}}
           placeholder={'Berat dalam Kilogram'}
           name={'Berat :'}
+          icon ={require('../../images/heavy.png')}
         />
         <Text style={styles.ukuran}> Ukuran : </Text>
 
