@@ -104,23 +104,6 @@ const EditProduk = () => {
             </View>
           ))}
       </ScrollView>
-      <View
-        style={{
-          position: 'absolute',
-          bottom: 0,
-          height: 150,
-          width: '100%',
-          alignItems: 'center',
-        }}>
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            width: '80%',
-            height: 40,
-          }}></View>
-      </View>
     </SafeAreaView>
   );
 };
