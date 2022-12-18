@@ -1,9 +1,11 @@
+/* eslint-disable prettier/prettier */
+/* eslint-disable react-native/no-inline-styles */
+/* eslint-disable prettier/prettier */
 import {View, Text} from 'react-native';
 import React from 'react';
 import {SelectList} from 'react-native-dropdown-select-list';
 
 const ComDropList = ({name, values, defaultValue}) => {
-  const [selected, setSelected] = React.useState('');
 
   const data = [
     {key: '1', value: 'Makanan'},

@@ -1,3 +1,6 @@
+/* eslint-disable prettier/prettier */
+/* eslint-disable react-native/no-inline-styles */
+/* eslint-disable prettier/prettier */
 import {
   View,
   Text,
@@ -30,7 +33,6 @@ const EditProduk2 = ({route}) => {
   const [value, setValue] = React.useState('');
   const [Pic, SetPic] = React.useState('');
   const [Pics, SetPics] = React.useState('');
-  const [data, setData] = useState({});
   const [changepict, setChangepict] = useState(false);
   // route.params.key
 
@@ -50,11 +52,10 @@ const EditProduk2 = ({route}) => {
           onChangeWeight(simpandata.berat);
           setValue(simpandata.ukuran);
           SetPics(simpandata.image);
-          setData(simpandata);
         });
     }
     fetchdata();
-  }, []);
+  }, [route.params.key]);
   const setToastMsg = msg => {
     ToastAndroid.showWithGravity(msg, ToastAndroid.SHORT, ToastAndroid.CENTER);
   };
@@ -66,7 +67,7 @@ const EditProduk2 = ({route}) => {
     };
 
     const result = await launchImageLibrary(option);
-    if (result.didCancel == true) {
+    if (result.didCancel === true) {
       Alert.alert('ERROR', result.errorMessage);
     } else {
       SetPic(result.assets[0]);
@@ -101,7 +102,7 @@ const EditProduk2 = ({route}) => {
       berat !== '' &&
       value !== ''
     ) {
-      if (Pic != '') {
+      if (Pic !== '') {
         try {
           const reference = storage().ref('Images/' + namaProduk);
           const task = reference.putFile(Pic.uri);
@@ -230,7 +231,7 @@ const EditProduk2 = ({route}) => {
         <Text style={styles.ukuran}> Ukuran : </Text>
 
         <RadioButton.Group
-          onValueChange={value => setValue(value)}
+          onValueChange={setValue}
           value={value}>
           <RadioButton.Item label="Small" value="Small" />
           <RadioButton.Item label="Medium" value="Medium" />

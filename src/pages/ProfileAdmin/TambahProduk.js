@@ -1,3 +1,6 @@
+/* eslint-disable prettier/prettier */
+/* eslint-disable react-native/no-inline-styles */
+/* eslint-disable prettier/prettier */
 import {
   View,
   Text,
@@ -29,7 +32,6 @@ const TambahProduk = () => {
   const [berat, onChangeWeight] = useState('');
   const [value, setValue] = React.useState('');
   const [Pic, SetPic] = React.useState('');
-  const [DownPic, SetDownPic] = React.useState('');
   const setToastMsg = msg => {
     ToastAndroid.showWithGravity(msg, ToastAndroid.SHORT, ToastAndroid.CENTER);
   };
@@ -41,7 +43,7 @@ const TambahProduk = () => {
     };
 
     const result = await launchImageLibrary(option);
-    if (result.didCancel == true) {
+    if (result.didCancel === true) {
       Alert.alert('ERROR', result.errorMessage);
     } else {
       SetPic(result.assets[0]);
@@ -99,7 +101,6 @@ const TambahProduk = () => {
           const url = await storage()
             .ref('Images/' + namaProduk)
             .getDownloadURL();
-          SetDownPic(url);
           uploadfirestore(url);
         });
       } catch (e) {
@@ -136,15 +137,6 @@ const TambahProduk = () => {
   // 	navigation.navigate('TambahProduk2');
   // }
 
-  const checkdata = () => {
-    console.log(namaProduk);
-    console.log(harga);
-    console.log(kategori);
-    console.log(Jenis);
-    console.log(berat);
-    console.log(value);
-    console.log(DownPic);
-  };
 
   return (
     <ScrollView>
@@ -202,7 +194,7 @@ const TambahProduk = () => {
         <Text style={styles.ukuran}> Ukuran : </Text>
 
         <RadioButton.Group
-          onValueChange={value => setValue(value)}
+          onValueChange={setValue}
           value={value}>
           <RadioButton.Item label="Small" value="Small" />
           <RadioButton.Item label="Medium" value="Medium" />

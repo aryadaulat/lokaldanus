@@ -1,3 +1,6 @@
+/* eslint-disable prettier/prettier */
+/* eslint-disable react-native/no-inline-styles */
+/* eslint-disable prettier/prettier */
 import {
   View,
   Text,
@@ -9,7 +12,6 @@ import {
 import React, {useState, useEffect} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import ComButton from '../../common/ComButton';
 import firestore from '@react-native-firebase/firestore';
 
 const EditProduk = () => {
@@ -84,7 +86,7 @@ const EditProduk = () => {
         </TouchableOpacity>
       </View>
       <ScrollView>
-        {data != '' &&
+        {data !== '' &&
           data.map(datas => (
             <View style={styles.content} key={datas.key}>
               <Image source={{uri: datas.image}} style={styles.images} />
@@ -130,7 +132,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: 'bold',
     color: '#000',
-    fontWeight: '600',
   },
   txt: {
     fontSize: 12,
