@@ -2,7 +2,7 @@ import {View, Text} from 'react-native';
 import React from 'react';
 import {SelectList} from 'react-native-dropdown-select-list';
 
-const ComDropList = ({name, values}) => {
+const ComDropList = ({name, values, defaultValue}) => {
   const [selected, setSelected] = React.useState('');
 
   const data = [
@@ -26,6 +26,7 @@ const ComDropList = ({name, values}) => {
         data={data}
         save="value"
         boxStyles={{marginHorizontal: 22}}
+        defaultOption={{value: defaultValue}}
       />
     </View>
   );
