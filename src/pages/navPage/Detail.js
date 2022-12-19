@@ -1,10 +1,19 @@
-import {View, Text, SafeAreaView, Image, TouchableOpacity, ScrollView, TextInput} from 'react-native';
-import React from 'react';
+import {
+  View,
+  Text,
+  SafeAreaView,
+  Image,
+  TouchableOpacity,
+  ScrollView,
+  TextInput,
+} from 'react-native';
+import React, {useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import ComButton from '../../common/ComButton';
 
-const Detail = () => {
+const Detail = ({route}) => {
   const navigation = useNavigation();
+  const [jumlah, onChangeJumlah] = useState('');
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: '#f3c102'}}>
       <View
@@ -33,7 +42,7 @@ const Detail = () => {
           />
         </TouchableOpacity>
         <Image
-          source={require('../../images/jaspendek.png')}
+          source={{uri: route.params.data.image}}
           style={{height: 250, width: 250, marginTop: 50}}
         />
         <View
@@ -65,42 +74,51 @@ const Detail = () => {
           height: '50%',
           paddingHorizontal: 10,
           paddingVertical: 10,
-          borderTopLeftRadius:40,
-          borderTopRightRadius:40,
+          borderTopLeftRadius: 40,
+          borderTopRightRadius: 40,
         }}>
-        <Text>Jas Lengan Pendek</Text>
-        <Text>Harga : 135.000</Text>
-        <View style={{backgroundColor:"#000", width:'80%', height:2}}></View>
-        <View style={{flexDirection:'row'}}>
-            <Text>jenis : lengan panjang </Text>
-            <Text> berat : 0.25kg</Text>
+        <Text>{route.params.data.nama}</Text>
+        <Text>Harga : {route.params.data.harga}</Text>
+        <View style={{backgroundColor: '#000', width: '80%', height: 2}}></View>
+        <View style={{flexDirection: 'row'}}>
+          <Text>jenis : {route.params.data.jenis} </Text>
+          <Text> berat : {route.params.data.berat}kg</Text>
         </View>
-        <View style={{flexDirection:'row'}}>
-        <View style={{marginTop:20}}>
-      <Text style={{marginLeft:30, fontWeight:'bold'}}>Jumlah :</Text>
-        <View
-        style={{
-          width: '50%',
-          height: 50,
-          borderWidth: 1,
-          borderRadius: 10,
-          alignSelf: 'center',
-          marginTop: 5,
-          alignItems: 'center',
-          paddingLeft: 20,
-          paddingRight: 20,
-        }}>
-        <TextInput
-          placeholder={"satuan"}
-          style={{marginLeft: 10}}
+        <View style={{flexDirection: 'row'}}>
+          <View style={{marginTop: 20}}>
+            <Text style={{marginLeft: 30, fontWeight: 'bold'}}>Jumlah :</Text>
+            <View
+              style={{
+                width: '50%',
+                height: 50,
+                borderWidth: 1,
+                borderRadius: 10,
+                alignSelf: 'center',
+                marginTop: 5,
+                alignItems: 'center',
+                paddingLeft: 20,
+                paddingRight: 20,
+              }}>
+              <TextInput
+                value={jumlah}
+                placeholder={'satuan'}
+                style={{marginLeft: 10,width: 40}}
+                onChangeText={onChangeJumlah}
+								keyboardType="numeric"
+              />
+            </View>
+          </View>
+          <Text> berat : {route.params.data.berat}kg</Text>
+        </View>
+        <ComButton
+          title={'Masukkan Keranjang'}
+          onPress={() => {
+            navigation.navigate('Keranjang');
+          }}
+          bgColor={'#f3c102'}
+          textColor={'#fff'}
         />
-        </View>
-        </View>
-            <Text> berat : 0.25kg</Text>
-        </View>
-        <ComButton title={'Masukkan Keranjang'} onPress={()=>{navigation.navigate("Keranjang")}} bgColor={'#f3c102'} textColor={"#fff"}/>
-
-        </View>
+      </View>
     </SafeAreaView>
   );
 };

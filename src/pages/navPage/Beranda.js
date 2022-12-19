@@ -124,11 +124,12 @@ const Beranda = () => {
         style={{
           alignItems: 'center',
           width: '100%',
+          flex: 1,
         }}>
         <FlatGrid
           itemDimension={130}
           data={data}
-          style={{}}
+          style={{marginBottom: 70}}
           // staticDimension={300}
           // fixed
           spacing={10}
@@ -182,7 +183,7 @@ const Beranda = () => {
                   elevation: 10,
                 }}
                 onPress={() => {
-                  onPress();
+                  navigation.navigate('Detail', {data: item});
                 }}>
                 <Text style={{color: '#fff', fontWeight: 'bold', fontSize: 10}}>
                   Detail
