@@ -17,7 +17,7 @@ import {FlatGrid} from 'react-native-super-grid';
 const Beranda = () => {
   const navigation = useNavigation();
   const [data, setData] = useState([]);
-
+  const [datatampil, setDataTampil] = useState([]);
   useEffect(() => {
     async function fetchdata() {
       await firestore()
@@ -41,12 +41,18 @@ const Beranda = () => {
             simpandata = [...simpandata, createdata];
           });
           setData(simpandata);
+          setDataTampil(simpandata);
         });
     }
     fetchdata();
   }, []);
 
-  const Kategory = ({onPress, image, bgColor}) => {
+  const filter = value => {
+    let check = data.filter(datas => datas.kategori === value);
+    setDataTampil(check);
+  };
+
+  const Kategory = ({onPress, image, bgColor, value}) => {
     return (
       <TouchableOpacity
         style={{
@@ -65,9 +71,7 @@ const Beranda = () => {
           shadowRadius: 5,
           elevation: 10,
         }}
-        onPress={() => {
-          onPress();
-        }}>
+        onPress={() => filter(value)}>
         <Image source={image} style={{width: 57, height: 57}} />
       </TouchableOpacity>
     );
@@ -105,10 +109,22 @@ const Beranda = () => {
           marginHorizontal: 2,
           height: 100,
         }}>
-        <Kategory image={require('../../images/Kategori-1.png')} />
-        <Kategory image={require('../../images/Kategori-2.png')} />
-        <Kategory image={require('../../images/Kategori-3.png')} />
-        <Kategory image={require('../../images/Kategori-4.png')} />
+        <Kategory
+          image={require('../../images/Kategori-1.png')}
+          value={'Makanan'}
+        />
+        <Kategory
+          image={require('../../images/Kategori-2.png')}
+          value={'Minuman'}
+        />
+        <Kategory
+          image={require('../../images/Kategori-3.png')}
+          value={'Merchandise'}
+        />
+        <Kategory
+          image={require('../../images/Kategori-4.png')}
+          value={'Pakaian'}
+        />
       </View>
       <Text
         style={{
@@ -128,9 +144,9 @@ const Beranda = () => {
         }}>
         <FlatGrid
           itemDimension={130}
-          data={data}
+          data={datatampil}
           style={{marginBottom: 70}}
-          // staticDimension={300}
+          staticDimension={350}
           // fixed
           spacing={10}
           renderItem={({item}) => (
