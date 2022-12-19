@@ -13,6 +13,7 @@ import {useNavigation} from '@react-navigation/native';
 import ComCard from '../../common/ComCard';
 import firestore from '@react-native-firebase/firestore';
 import {FlatGrid} from 'react-native-super-grid';
+import { addItemToCart } from '../../redux/actions/Actions';
 
 const Beranda = () => {
   const navigation = useNavigation();
@@ -149,7 +150,7 @@ const Beranda = () => {
           staticDimension={350}
           // fixed
           spacing={10}
-          renderItem={({item}) => (
+          renderItem={({item}) => (   
             <View
               style={{
                 justifyContent: 'center',

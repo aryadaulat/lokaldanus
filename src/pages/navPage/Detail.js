@@ -6,12 +6,28 @@ import {
   TouchableOpacity,
   ScrollView,
   TextInput,
+  Alert,
 } from 'react-native';
 import React, {useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import ComButton from '../../common/ComButton';
+import {useDispatch} from 'react-redux';
+import {addItemToCart, addToWishlist} from '../../redux/actions/Actions';
 
 const Detail = ({route}) => {
+  const [select, setSelect] = useState(0);
+
+  const like = require('../../images/heart.png');
+  const dislike = require('../../images/love.png');
+
+  const dispatch = useDispatch();
+  const addItem = item => {
+    dispatch(addItemToCart(item));
+  };
+  const addwishlist = item => {
+    dispatch(addToWishlist(item));
+  };
+  const iswishlist = 'cek';
   const navigation = useNavigation();
   const [jumlah, onChangeJumlah] = useState('');
   return (
@@ -59,10 +75,16 @@ const Detail = ({route}) => {
             shadowRadius: 5,
             elevation: 10,
           }}>
-          <Image
-            source={require('../../images/love.png')}
-            style={{height: 30, width: 30}}
-          />
+          <TouchableOpacity
+            onPress={() => {
+              setSelect(1)
+              addwishlist(route.params.data);
+            }}>
+            <Image
+              source={select == 1 ? like : dislike}
+              style={{height: 30, width: 30}}
+            />
+          </TouchableOpacity>
         </View>
       </View>
       <View
@@ -102,9 +124,9 @@ const Detail = ({route}) => {
               <TextInput
                 value={jumlah}
                 placeholder={'satuan'}
-                style={{marginLeft: 10,width: 40}}
+                style={{marginLeft: 10, width: 40}}
                 onChangeText={onChangeJumlah}
-								keyboardType="numeric"
+                keyboardType="numeric"
               />
             </View>
           </View>
@@ -113,7 +135,9 @@ const Detail = ({route}) => {
         <ComButton
           title={'Masukkan Keranjang'}
           onPress={() => {
-            navigation.navigate('Keranjang');
+            Alert.alert('Data berhasil dimasukkan ke keranjang');
+            addItem(route.params.data);
+            console.log(route.params.data);
           }}
           bgColor={'#f3c102'}
           textColor={'#fff'}
