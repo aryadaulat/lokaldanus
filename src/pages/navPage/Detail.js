@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import {
   View,
   Text,
@@ -11,6 +12,7 @@ import {
 import React, {useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import ComButton from '../../common/ComButton';
+
 import {useDispatch} from 'react-redux';
 import {addItemToCart, addToWishlist} from '../../redux/actions/Actions';
 
@@ -28,6 +30,7 @@ const Detail = ({route}) => {
     dispatch(addToWishlist(item));
   };
   const iswishlist = 'cek';
+  const Ket = 'Keterangan';
   const navigation = useNavigation();
   const [jumlah, onChangeJumlah] = useState('');
   return (
@@ -77,7 +80,7 @@ const Detail = ({route}) => {
           }}>
           <TouchableOpacity
             onPress={() => {
-              setSelect(1)
+              setSelect(1);
               addwishlist(route.params.data);
             }}>
             <Image
@@ -99,24 +102,52 @@ const Detail = ({route}) => {
           borderTopLeftRadius: 40,
           borderTopRightRadius: 40,
         }}>
-        <Text>{route.params.data.nama}</Text>
-        <Text>Harga : {route.params.data.harga}</Text>
-        <View style={{backgroundColor: '#000', width: '80%', height: 2}}></View>
+        <Text
+          style={{
+            fontSize: 24,
+            fontWeight: 'bold',
+            color: 'black',
+            marginVertical: 10,
+          }}>
+          {route.params.data.nama}
+        </Text>
+        <Text style={{fontSize: 24, color: 'black', fontWeight: 'bold'}}>
+          Harga : {route.params.data.harga}
+        </Text>
+        <View style={{backgroundColor: '#000', width: '80%', height: 2}} />
         <View style={{flexDirection: 'row'}}>
-          <Text>jenis : {route.params.data.jenis} </Text>
-          <Text> berat : {route.params.data.berat}kg</Text>
+          <Text style={{fontSize: 13, color: 'black', fontWeight: 'bold'}}>
+            jenis : {route.params.data.jenis}{' '}
+          </Text>
+          <Text
+            style={{
+              fontSize: 13,
+              color: 'black',
+              fontWeight: 'bold',
+              marginHorizontal: 100,
+            }}>
+            berat : {route.params.data.berat}kg
+          </Text>
         </View>
         <View style={{flexDirection: 'row'}}>
-          <View style={{marginTop: 20}}>
-            <Text style={{marginLeft: 30, fontWeight: 'bold'}}>Jumlah :</Text>
+          <View style={{marginTop: 20, flexDirection: 'row', flex: 1}}>
+            <Text
+              style={{
+                marginLeft: 20,
+                color: 'black',
+                fontSize: 13,
+                fontWeight: 'bold',
+              }}>
+              Jumlah :
+            </Text>
             <View
               style={{
                 width: '50%',
-                height: 50,
+                height: 30,
                 borderWidth: 1,
                 borderRadius: 10,
                 alignSelf: 'center',
-                marginTop: 5,
+                marginTop: 10,
                 alignItems: 'center',
                 paddingLeft: 20,
                 paddingRight: 20,
@@ -124,13 +155,37 @@ const Detail = ({route}) => {
               <TextInput
                 value={jumlah}
                 placeholder={'satuan'}
-                style={{marginLeft: 10, width: 40}}
+                style={{marginLeft: 50, width: 100, height: 30}}
                 onChangeText={onChangeJumlah}
                 keyboardType="numeric"
               />
             </View>
           </View>
-          <Text> berat : {route.params.data.berat}kg</Text>
+          <View style={{marginTop: 20, flex: 1}}>
+            <Text
+              style={{
+                marginLeft: 30,
+                color: 'black',
+                fontSize: 13,
+                fontWeight: 'bold',
+              }}>
+              Ket :
+            </Text>
+            <View
+              style={{
+                width: '50%',
+                height: 30,
+                borderWidth: 1,
+                borderRadius: 10,
+                alignSelf: 'center',
+                marginTop: 10,
+                alignItems: 'center',
+                paddingLeft: 20,
+                paddingRight: 20,
+              }}
+            />
+            <TextInput style={{marginLeft: 60}} keyboardType="alphabetic" />
+          </View>
         </View>
         <ComButton
           title={'Masukkan Keranjang'}
