@@ -12,8 +12,8 @@ const SignUp2 = () => {
   const navigation = useNavigation();
   const [phone, onChangePhone] = useState('');
   const [alamat, onChangeAlamat] = useState('');
-  const [provinsi, setProvinsi] = useState('');
-  const [kabupaten, setKabupaten] = useState('');
+  const [provinsi, onChangeProvinsi] = useState('');
+  const [kabupaten, onChangeKabupaten] = useState('');
   const checkuser = () => {
     console.log(auth().currentUser);
   };
@@ -83,8 +83,20 @@ const SignUp2 = () => {
             placeholder={'Enter Your Number Phone'}
             name={'Number Phone :'}
           />
-          <ComDropList name={'Provinsi :'} values={setProvinsi} />
-          <ComDropList name={'Kabupaten/Kota :'} values={setKabupaten} />
+          <ComTextInput
+            value={provinsi}
+            onChangeText={onChangeProvinsi}
+            style={{marginTop: 10}}
+            placeholder={'Enter Your Province'}
+            name={'Provinsi :'}
+          />
+            <ComTextInput
+            value={kabupaten}
+            onChangeText={onChangeKabupaten}
+            style={{marginTop: 10}}
+            placeholder={'Enter Your Kabupaten/Kota'}
+            name={'Kabupaten/Kota:'}
+          />
           <ComButton
             title={'Sign Up'}
             bgColor={'#f3c10d'}
