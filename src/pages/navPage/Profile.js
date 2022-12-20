@@ -9,9 +9,24 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
+import auth from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
 
 const Profile = () => {
   const navigation = useNavigation();
+
+  useEffect(() => {
+    const getdata = async () => {
+      await firestore()
+        .collection('Users')
+        .doc(auth().currentUser.uid)
+        .onSnapshot(documentSnapshot => {
+          console.log('User data: ', documentSnapshot.data());
+        });
+    };
+    getdata();
+  }, []);
+
   const ComButtonCustom = ({onPress, image, title, bgColor, textColor}) => {
     return (
       <TouchableOpacity
@@ -47,7 +62,14 @@ const Profile = () => {
       </TouchableOpacity>
     );
   };
-
+  const signout = () => {
+    // () => {
+    // 	navigation.navigate('Login');
+    // }
+    auth()
+      .signOut()
+      .then(() => navigation.navigate('Login'));
+  };
   return (
     <ScrollView style={{flex: 1}} showsVerticalScrollIndicator={false}>
       <SafeAreaView style={{flex: 1}}>
@@ -82,7 +104,7 @@ const Profile = () => {
                 fontSize: 20,
                 color: 'black',
               }}>
-              Entahlah
+              test
             </Text>
           </View>
 
@@ -91,18 +113,14 @@ const Profile = () => {
               textAlign: 'center',
               fontSize: 16,
               color: 'black',
-            }}>
-            No HP : 0821
-          </Text>
+            }}></Text>
 
           <Text
             style={{
               textAlign: 'center',
               fontSize: 16,
               color: 'black',
-            }}>
-            Jl. Bebas
-          </Text>
+            }}></Text>
 
           <ComButtonCustom
             title={'Edit Profil'}
@@ -127,9 +145,7 @@ const Profile = () => {
             bgColor={'#ffff'}
             textColor={'black'}
             image={require('../../images/signOut.png')}
-            onPress={() => {
-              navigation.navigate('Login');
-            }}
+            onPress={signout}
           />
           <View
             style={{

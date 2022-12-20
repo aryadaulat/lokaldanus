@@ -16,8 +16,9 @@ import ComTextInput from '../../common/ComTextInput';
 import ComButton from '../../common/ComButton';
 import {useNavigation} from '@react-navigation/native';
 import {launchImageLibrary} from 'react-native-image-picker';
-
+import auth from '@react-native-firebase/auth';
 const EditProfil = () => {
+  const user = auth().currentUser;
   const navigation = useNavigation();
   const [nama, onChangeNama] = useState('');
   const [email, onChangeEmail] = useState('');
@@ -29,7 +30,7 @@ const EditProfil = () => {
   const [Pics, SetPics] = React.useState('');
   const [data, setData] = useState({});
   const [changepict, setChangepict] = useState(false);
-  
+
   const setToastMsg = msg => {
     ToastAndroid.showWithGravity(msg, ToastAndroid.SHORT, ToastAndroid.CENTER);
   };
@@ -55,7 +56,7 @@ const EditProfil = () => {
         );
       } else {
         SetPic(response.assets[0].base64);
-      }   
+      }
     });
   };
 
@@ -173,9 +174,10 @@ const EditProfil = () => {
             title={'Continue'}
             bgColor={'#f3c10d'}
             textColor={'#ffff'}
-            onPress={() => {
-              navigation.navigate('Home');
-            }}
+            onPress={() => console.log(user.uid)}
+            // onPress={() => {
+            //   navigation.navigate('Home');
+            // }}
           />
         </View>
       </View>

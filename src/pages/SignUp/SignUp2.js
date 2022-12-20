@@ -6,14 +6,28 @@ import ComDropList from '../../common/ComDropList';
 import ComTextMessege from '../../common/ComTextMessege';
 import ComTextInput from '../../common/ComTextInput';
 import auth from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
 
 const SignUp2 = () => {
   const navigation = useNavigation();
   const [phone, onChangePhone] = useState('');
-
-	const checkuser =()=>{
-		console.log(auth().currentUser)
-	}
+  const [alamat, onChangeAlamat] = useState('');
+  const [provinsi, setProvinsi] = useState('');
+  const [kabupaten, setKabupaten] = useState('');
+  const checkuser = () => {
+    console.log(auth().currentUser);
+  };
+  const update = () => {
+    firestore()
+      .collection('Users')
+      .doc(auth().currentUser.uid)
+      .update({
+        age: 31,
+      })
+      .then(() => {
+        console.log('User updated!');
+      });
+  };
   return (
     <ScrollView style={{flex: 1}} showsVerticalScrollIndicator={false}>
       <View style={{flex: 1}}>
@@ -54,6 +68,8 @@ const SignUp2 = () => {
             elevation: 5,
           }}>
           <ComTextMessege
+            value={alamat}
+            onChange={onChangeAlamat}
             placeholder={'Enter Your Domisili'}
             name={'Alamat :'}
           />
@@ -64,8 +80,8 @@ const SignUp2 = () => {
             placeholder={'Enter Your Number Phone'}
             name={'Number Phone :'}
           />
-          <ComDropList name={'Provinsi :'} />
-          <ComDropList name={'Kabupaten/Kota :'} />
+          <ComDropList name={'Provinsi :'} values={setProvinsi} />
+          <ComDropList name={'Kabupaten/Kota :'} values={setKabupaten} />
           <ComButton
             title={'Sign Up'}
             bgColor={'#f3c10d'}

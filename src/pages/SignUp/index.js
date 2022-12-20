@@ -5,6 +5,7 @@ import ComTextInput from '../../common/ComTextInput';
 import ComButton from '../../common/ComButton';
 import {useNavigation} from '@react-navigation/native';
 import auth from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
 
 const SignUp = () => {
   const navigation = useNavigation();
@@ -15,11 +16,16 @@ const SignUp = () => {
     auth()
       .createUserWithEmailAndPassword(email, password)
       .then(() => {
-        const update = {
-          displayName: nama,
-          photoURL: '',
-        };
-        auth().currentUser.updateProfile(update);
+        firestore()
+          .collection('Users')
+          .doc(auth().currentUser.uid)
+          .set({
+            nama: nama,
+            email: email,
+          })
+          .then(() => {
+            console.log('User added!');
+          });
         navigation.navigate('SignUp2');
       })
       .catch(error => {
@@ -79,7 +85,7 @@ const SignUp = () => {
             style={{marginTop: 10}}
             placeholder={'Enter Your Name'}
             name={'Nama :'}
-            icon ={require('../../images/id-card.png')}
+            icon={require('../../images/id-card.png')}
           />
           <ComTextInput
             value={email}
@@ -87,7 +93,7 @@ const SignUp = () => {
             style={{marginTop: 10}}
             placeholder={'Enter Your Email'}
             name={'Email :'}
-            icon ={require('../../images/mail.png')}
+            icon={require('../../images/mail.png')}
           />
 
           <ComTextInput
@@ -96,7 +102,7 @@ const SignUp = () => {
             placeholder={'Enter Password'}
             name={'Password :'}
             type={'password'}
-            icon ={require('../../images/padlock.png')}
+            icon={require('../../images/padlock.png')}
           />
           <ComButton
             title={'Continue'}
