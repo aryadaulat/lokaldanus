@@ -29,6 +29,22 @@ const Keranjang = () => {
     var str = num.replace(new RegExp(re, 'g'), '$&' + ',');
     return str;
 }
+  const tambah= ()=>{
+    items.map((item)=>{
+      awal = Number(item.banyak)
+      awal++;
+      item.banyak = awal.toString()
+    })
+  }
+  const kurang=()=>{
+    items.map((item)=>{
+      if (item.banyak!=='1'){
+        awal = Number(item.banyak)
+        awal = awal +1
+        item.banyak = awal
+      }
+    })
+  }
   const getTotal = ()=>{
     let temptotal = 0;
     items.map((item)=>{
@@ -89,11 +105,17 @@ const Keranjang = () => {
               <View>
                 <Text style={styles.txt}>{item.nama}{'\n'}</Text>
                 <Text style={styles.txt}>Harga : {item.harga} </Text>
-                <Text style={styles.txt}>Jumlah Pesanan : </Text>
+                <Text style={styles.txt}>Jumlah Pesanan : {item.banyak}</Text>
                 <Text style={styles.txt}>Ukuran : {item.ukuran}</Text>
                 <Text style={styles.txt}>Total Harga :{item.harga} </Text>
-                <Text style={styles.txt}>Deskripsi : </Text>
+                <Text style={styles.txt}>Deskripsi : {item.desk}</Text>
               </View>
+              <TouchableOpacity onPress={()=>{tambah()}} style={{height:20 , width:20, backgroundColor:'green', justifyContent:'center', alignItems:'center', borderRadius:7}}>
+                <Text style={{ fontWeight:"800", color:'white'}}>+</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={{height:20 , width:20, backgroundColor:'green', justifyContent:'center', alignItems:'center',borderRadius:7}}>
+                <Text style={{ fontWeight:"800", color:'white'}}>-</Text>
+              </TouchableOpacity>
               <TouchableOpacity onPress={()=>{removeItem(index)}}>
 
               <Image source={require('../../images/Delete.png')}/>
@@ -127,7 +149,9 @@ const Keranjang = () => {
          {'Rp.'+ numberFormat(getTotal())}
 
           </Text>
+
         </View>
+        
         <ComButton
           title={'Check Out'}
           onPress={() => {

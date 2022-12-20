@@ -1,7 +1,7 @@
 import {View, Text, TouchableOpacity} from 'react-native';
 import React from 'react';
 
-const ComButton = ({onPress, title, bgColor, textColor}) => {
+const ComButton = ({onPress, title, bgColor, textColor, disable}) => {
   return (
     <TouchableOpacity
       style={{

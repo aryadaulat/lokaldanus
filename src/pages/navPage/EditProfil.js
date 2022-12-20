@@ -29,29 +29,7 @@ const EditProfil = () => {
   const [Pics, SetPics] = React.useState('');
   const [data, setData] = useState({});
   const [changepict, setChangepict] = useState(false);
-
-
-  useEffect(() => {
-    async function fetchdata() {
-      await firestore()
-        .collection('Produk')
-        .doc(route.params.key)
-        .get()
-        .then(querySnapshot => {
-          var simpandata = querySnapshot.data();
-          console.log(simpandata);
-          onChangeNamaProduk(simpandata.nama);
-          onChangeHarga(simpandata.harga);
-          onChangeCategory(simpandata.kategori);
-          onChangeJenis(simpandata.jenis);
-          onChangeWeight(simpandata.berat);
-          setValue(simpandata.ukuran);
-          SetPics(simpandata.image);
-          setData(simpandata);
-        });
-    }
-    fetchdata();
-  }, []);
+  
   const setToastMsg = msg => {
     ToastAndroid.showWithGravity(msg, ToastAndroid.SHORT, ToastAndroid.CENTER);
   };

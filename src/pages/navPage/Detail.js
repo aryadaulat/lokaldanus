@@ -9,30 +9,61 @@ import {
   TextInput,
   Alert,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import ComButton from '../../common/ComButton';
 
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {addItemToCart, addToWishlist} from '../../redux/actions/Actions';
 import { black } from 'react-native-paper/lib/typescript/styles/colors';
 
 const Detail = ({route}) => {
+  
+  const [state, setState] = useState(false)
+  const [state1, setState1] = useState(false)
+
+  const items = useSelector(state=>state.Reducers);
+  const wish = useSelector(state=>state.Reducers2)
+  useEffect(()=>{
+    console.log(wish)
+    console.log(items)
+    items.forEach(element => {
+      if(element.key===route.params.data.key){
+        setState1(true);
+        
+      }
+      
+    });
+
+    wish.forEach(element => {
+      if(element.key===route.params.data.key){
+        setSelect(1);
+        setState(true);
+        
+      }
+      
+    });
+  })
   const [select, setSelect] = useState(0);
 
   const like = require('../../images/heart.png');
   const dislike = require('../../images/love.png');
 
+  
   const dispatch = useDispatch();
   const addItem = item => {
-    dispatch(addItemToCart(item));
+    const data = Object.assign({banyak:jumlah, desk:desk, cek:false}, item);
+    // var tambah = {};
+    // tambah.banyak = jumlah;
+    // item.push(tambah);
+    // console.log(item);
+    dispatch(addItemToCart(data));
   };
   const addwishlist = item => {
     dispatch(addToWishlist(item));
   };
-  const iswishlist = 'cek';
-  const Ket = 'Keterangan';
   const navigation = useNavigation();
+  const [desk, onChangeDesk] = useState('');
   const [jumlah, onChangeJumlah] = useState('');
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: '#f3c102'}}>
@@ -80,8 +111,8 @@ const Detail = ({route}) => {
             elevation: 10,
           }}>
           <TouchableOpacity
+            disabled={state}
             onPress={() => {
-              setSelect(1);
               addwishlist(route.params.data);
             }}>
             <Image
@@ -186,19 +217,27 @@ const Detail = ({route}) => {
                 padding:8
               }}
             >
-            <TextInput placeholder='aku mau yang pedes !!' style={{ width:"100%", height:"100%", fontSize:15}} keyboardType="alphabetic" />
+            <TextInput value={desk} onChangeText={onChangeDesk} placeholder='aku mau yang pedes !!' style={{ width:"100%", height:"100%", fontSize:15}} keyboardType="alphabetic" />
             </View>
           </View>
-        <ComButton
-          title={'Masukkan Keranjang'}
-          onPress={() => {
-            Alert.alert('Data berhasil dimasukkan ke keranjang');
-            addItem(route.params.data);
-            console.log(route.params.data);
-          }}
-          bgColor={'#f3c102'}
-          textColor={'#fff'}
-        />
+          <TouchableOpacity
+          disabled = {state1}
+      style={{
+        backgroundColor: state1==true?'black':'#f3c102',
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '85%',
+        height: 50,
+        borderRadius: 10,
+        alignSelf: 'center',
+        marginTop: 30,
+      }}
+      onPress={() => {
+        Alert.alert('Data berhasil dimasukkan ke keranjang');
+        addItem(route.params.data);
+      }}>
+      <Text style={{color: '#ffff', fontWeight:'bold', fontSize:20}}>Masukkan Keranjang</Text>
+    </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
