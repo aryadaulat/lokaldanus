@@ -15,6 +15,7 @@ import ComButton from '../../common/ComButton';
 
 import {useDispatch} from 'react-redux';
 import {addItemToCart, addToWishlist} from '../../redux/actions/Actions';
+import { black } from 'react-native-paper/lib/typescript/styles/colors';
 
 const Detail = ({route}) => {
   const [select, setSelect] = useState(0);
@@ -105,19 +106,20 @@ const Detail = ({route}) => {
         <Text
           style={{
             fontSize: 24,
-            fontWeight: 'bold',
+            fontWeight: '800',
             color: 'black',
             marginVertical: 10,
+            marginLeft:20
           }}>
           {route.params.data.nama}
         </Text>
-        <Text style={{fontSize: 24, color: 'black', fontWeight: 'bold'}}>
+        <Text style={{fontSize: 24, color: 'black', fontWeight:"500", marginLeft:20}}>
           Harga : {route.params.data.harga}
         </Text>
-        <View style={{backgroundColor: '#000', width: '80%', height: 2}} />
-        <View style={{flexDirection: 'row'}}>
+        <View style={{backgroundColor: '#000', width: '100%', height: 2}} />
+        <View style={{flexDirection: 'row', marginTop:10, marginLeft:40, justifyContent:'space-evenly'}}>
           <Text style={{fontSize: 13, color: 'black', fontWeight: 'bold'}}>
-            jenis : {route.params.data.jenis}{' '}
+            Jenis : {route.params.data.jenis}{' '}
           </Text>
           <Text
             style={{
@@ -126,11 +128,11 @@ const Detail = ({route}) => {
               fontWeight: 'bold',
               marginHorizontal: 100,
             }}>
-            berat : {route.params.data.berat}kg
+            Berat : {route.params.data.berat}kg
           </Text>
         </View>
-        <View style={{flexDirection: 'row'}}>
-          <View style={{marginTop: 20, flexDirection: 'row', flex: 1}}>
+        
+          <View style={{ flexDirection: 'row', flex: 1, alignItems:'center'}}>
             <Text
               style={{
                 marginLeft: 20,
@@ -142,29 +144,30 @@ const Detail = ({route}) => {
             </Text>
             <View
               style={{
-                width: '50%',
+                marginLeft:10,
+                width: 20,
                 height: 30,
                 borderWidth: 1,
                 borderRadius: 10,
                 alignSelf: 'center',
-                marginTop: 10,
                 alignItems: 'center',
                 paddingLeft: 20,
                 paddingRight: 20,
+                justifyContent:'center',
+                alignItems:'center'
               }}>
               <TextInput
                 value={jumlah}
-                placeholder={'satuan'}
-                style={{marginLeft: 50, width: 100, height: 30}}
+                placeholder={'1'}
+                style={{width: 30, height: 60, fontSize:15}}
                 onChangeText={onChangeJumlah}
                 keyboardType="numeric"
               />
             </View>
           </View>
-          <View style={{marginTop: 20, flex: 1}}>
+          <View style={{flexDirection:'row', justifyContent:'space-evenly', alignItems:'center'}}>
             <Text
               style={{
-                marginLeft: 30,
                 color: 'black',
                 fontSize: 13,
                 fontWeight: 'bold',
@@ -173,20 +176,19 @@ const Detail = ({route}) => {
             </Text>
             <View
               style={{
-                width: '50%',
-                height: 30,
+                width: '70%',
+                height: 60,
                 borderWidth: 1,
                 borderRadius: 10,
+                marginRight:20,
                 alignSelf: 'center',
-                marginTop: 10,
                 alignItems: 'center',
-                paddingLeft: 20,
-                paddingRight: 20,
+                padding:8
               }}
-            />
-            <TextInput style={{marginLeft: 60}} keyboardType="alphabetic" />
+            >
+            <TextInput placeholder='aku mau yang pedes !!' style={{ width:"100%", height:"100%", fontSize:15}} keyboardType="alphabetic" />
+            </View>
           </View>
-        </View>
         <ComButton
           title={'Masukkan Keranjang'}
           onPress={() => {

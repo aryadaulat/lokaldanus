@@ -22,6 +22,21 @@ const Keranjang = () => {
   const removeItem=(index) =>{
     dispatch(removeFromCart(index))
   }
+
+  const numberFormat = (value) => {
+    var re = '\\d(?=(\\d{' + 3 + '})+' + '\\D' + ')';
+    var num = value.toFixed(Math.max(0, ~~2));
+    var str = num.replace(new RegExp(re, 'g'), '$&' + ',');
+    return str;
+}
+  const getTotal = ()=>{
+    let temptotal = 0;
+    items.map((item)=>{
+      temptotal+=Number(item.harga);
+    })
+    console.log(temptotal)
+    return temptotal;
+  }
   console.log(items)
   return (
     <SafeAreaView style={{flex: 1}}>
@@ -109,7 +124,8 @@ const Keranjang = () => {
             Total Harga :
           </Text>
           <Text style={{fontSize: 20, fontWeight: 'bold', color: '#000'}}>
-            Rp.{'135.000'}
+         {'Rp.'+ numberFormat(getTotal())}
+
           </Text>
         </View>
         <ComButton
