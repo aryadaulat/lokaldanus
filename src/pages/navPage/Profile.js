@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -14,7 +14,7 @@ import firestore from '@react-native-firebase/firestore';
 
 const Profile = () => {
   const navigation = useNavigation();
-
+  const [nama, setNama] = useState('');
   useEffect(() => {
     const getdata = async () => {
       await firestore()
@@ -22,6 +22,7 @@ const Profile = () => {
         .doc(auth().currentUser.uid)
         .onSnapshot(documentSnapshot => {
           console.log('User data: ', documentSnapshot.data());
+          setNama(documentSnapshot.data().nama);
         });
     };
     getdata();
@@ -104,7 +105,7 @@ const Profile = () => {
                 fontSize: 20,
                 color: 'black',
               }}>
-              test
+              {nama}
             </Text>
           </View>
 

@@ -17,6 +17,9 @@ import ComButton from '../../common/ComButton';
 import {useNavigation} from '@react-navigation/native';
 import {launchImageLibrary} from 'react-native-image-picker';
 import auth from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
+import storage from '@react-native-firebase/storage';
+
 const EditProfil = () => {
   const user = auth().currentUser;
   const navigation = useNavigation();
@@ -34,35 +37,67 @@ const EditProfil = () => {
   const setToastMsg = msg => {
     ToastAndroid.showWithGravity(msg, ToastAndroid.SHORT, ToastAndroid.CENTER);
   };
-  const uploadImage = () => {
+  const uploadImage = async () => {
     let option = {
       mediaType: 'photo',
       quality: 1,
       includeBase64: true,
     };
 
-    launchImageLibrary(option, response => {
-      if (response.didCancel) {
-        setToastMsg('Cancelled image selection');
-      } else if ((response.errorCode = 'permission')) {
-        setToastMsg('permission not satisfied');
-      } else if ((response.errorCode = 'others')) {
-        setToastMsg(response.errorMessage);
-      } else if (response.assets[0].fileSize > 2097152) {
-        Alert.alert(
-          'Maximum image size exceeded',
-          'Please choose image under 2 MB',
-          [{text: 'ok'}],
-        );
-      } else {
-        SetPic(response.assets[0].base64);
-      }
-    });
+    const result = await launchImageLibrary(option);
+    if (result.didCancel === true) {
+      Alert.alert('ERROR', result.errorMessage);
+    } else {
+      SetPic(result.assets[0]);
+    }
   };
 
   const removeImage = () => {
     SetPic('');
     setToastMsg('Image Removed');
+  };
+  const upload = () => {
+    try {
+      const reference = storage().ref('Images/' + auth().currentUser.uid);
+      const task = reference.putFile(Pic.uri);
+      task.on('state_changed', taskSnapshot => {
+        console.log(
+          `${taskSnapshot.bytesTransferred} transferred out of ${taskSnapshot.totalBytes}`,
+        );
+
+        console.log(
+          Math.round(
+            (taskSnapshot.bytesTransferred / taskSnapshot.totalBytes) * 100,
+          ),
+        );
+      });
+
+      task.then(async () => {
+        const url = await storage()
+          .ref('Images/' + auth().currentUser.uid)
+          .getDownloadURL();
+        update(url);
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  const update = url => {
+    firestore()
+      .collection('Users')
+      .doc(auth().currentUser.uid)
+      .update({
+        nama: nama,
+        email: email,
+        phone: HP,
+        alamat: Alamat,
+        provinsi: Provinsi,
+        kabupaten: KoKab,
+        photoprofile: url,
+      })
+      .then(() => {
+        console.log('User updated!');
+      });
   };
   return (
     <ScrollView style={{flex: 1}} showsVerticalScrollIndicator={false}>
@@ -152,7 +187,7 @@ const EditProfil = () => {
             <Avatar.Image
               style={{justifyContent: 'center', bottom: -30}}
               size={150}
-              source={{uri: 'data:Image/png;base64,' + Pic}}
+              source={{uri: 'data:Image/png;base64,' + Pic.base64}}
             />
           </TouchableHighlight>
           <View
@@ -174,7 +209,7 @@ const EditProfil = () => {
             title={'Continue'}
             bgColor={'#f3c10d'}
             textColor={'#ffff'}
-            onPress={() => console.log(user.uid)}
+            onPress={upload}
             // onPress={() => {
             //   navigation.navigate('Home');
             // }}
