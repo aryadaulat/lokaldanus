@@ -1,10 +1,10 @@
 import {View, Text, Image, TextInput} from 'react-native';
 import React from 'react';
 
-const ComTextInput = ({name, placeholder, type}) => {
+const ComTextInput = ({name, placeholder, type, onChange, value}) => {
   return (
-    <View style={{marginTop:20}}>
-      <Text style={{marginLeft:30, fontWeight:'bold'}}>{name}</Text>
+    <View style={{marginTop: 20}}>
+      <Text style={{marginLeft: 30, fontWeight: 'bold'}}>{name}</Text>
       <View
         style={{
           width: '85%',
@@ -18,6 +18,8 @@ const ComTextInput = ({name, placeholder, type}) => {
           paddingRight: 20,
         }}>
         <TextInput
+          onChangeText={onChange}
+          value={value}
           placeholder={placeholder}
           secureTextEntry={type ? true : false}
           style={{marginLeft: 10}}
