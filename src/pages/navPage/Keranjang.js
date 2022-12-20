@@ -12,48 +12,51 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import {useNavigation} from '@react-navigation/native';
 import ComButton from '../../common/ComButton';
 import {useDispatch, useSelector} from 'react-redux';
-import { FlatGrid } from 'react-native-super-grid';
-import { removeFromCart } from '../../redux/actions/Actions';
+import {FlatGrid} from 'react-native-super-grid';
+import {removeFromCart} from '../../redux/actions/Actions';
 
 const Keranjang = () => {
   const items = useSelector(state => state.Reducers);
   const navigation = useNavigation();
-  const dispatch = useDispatch()
-  const removeItem=(index) =>{
-    dispatch(removeFromCart(index))
-  }
+  const dispatch = useDispatch();
+  const removeItem = index => {
+    dispatch(removeFromCart(index));
+  };
 
-  const numberFormat = (value) => {
+  const numberFormat = value => {
     var re = '\\d(?=(\\d{' + 3 + '})+' + '\\D' + ')';
     var num = value.toFixed(Math.max(0, ~~2));
     var str = num.replace(new RegExp(re, 'g'), '$&' + ',');
     return str;
-}
-  const tambah= ()=>{
-    items.map((item)=>{
-      awal = Number(item.banyak)
-      awal++;
-      item.banyak = awal.toString()
-    })
-  }
-  const kurang=()=>{
-    items.map((item)=>{
-      if (item.banyak!=='1'){
-        awal = Number(item.banyak)
-        awal = awal +1
-        item.banyak = awal
+  };
+  const tambah = () => {
+    items.map(item => {
+      awal = Number(item.banyak);
+      console.log(awal);
+      awal = awal + 1;
+      item.banyak = awal.toString();
+      console.log(item.banyak);
+    });
+  };
+  const kurang = () => {
+    items.map(item => {
+      if (item.banyak !== 1 && item.banyak !== '1') {
+        awal = Number(item.banyak);
+        awal = awal - 1;
+        item.banyak = awal;
+        console.log(item.banyak);
       }
-    })
-  }
-  const getTotal = ()=>{
+    });
+  };
+  const getTotal = () => {
     let temptotal = 0;
-    items.map((item)=>{
-      temptotal+=Number(item.harga);
-    })
-    console.log(temptotal)
+    items.map(item => {
+      temptotal += Number(item.harga);
+    });
+    console.log(temptotal);
     return temptotal;
-  }
-  console.log(items)
+  };
+  console.log(items);
   return (
     <SafeAreaView style={{flex: 1}}>
       <View
@@ -77,7 +80,7 @@ const Keranjang = () => {
           Keranjang
         </Text>
       </View>
-  
+
       <FlatList
         nestedScrollEnabled
         data={items}
@@ -99,26 +102,56 @@ const Keranjang = () => {
                 shadowRadius: 5,
                 elevation: 10,
                 borderRadius: 20,
-                marginBottom:20
+                marginBottom: 20,
               }}>
-              <Image source={{uri:item.image}} style={{width:80, height:80}}/>
+              <Image
+                source={{uri: item.image}}
+                style={{width: 80, height: 80}}
+              />
               <View>
-                <Text style={styles.txt}>{item.nama}{'\n'}</Text>
+                <Text style={{fontSize: 10, color: '#000', fontWeight: '800'}}>
+                  {item.nama}
+                  {'\n'}
+                </Text>
                 <Text style={styles.txt}>Harga : {item.harga} </Text>
                 <Text style={styles.txt}>Jumlah Pesanan : {item.banyak}</Text>
                 <Text style={styles.txt}>Ukuran : {item.ukuran}</Text>
                 <Text style={styles.txt}>Total Harga :{item.harga} </Text>
                 <Text style={styles.txt}>Deskripsi : {item.desk}</Text>
               </View>
-              <TouchableOpacity onPress={()=>{tambah()}} style={{height:20 , width:20, backgroundColor:'green', justifyContent:'center', alignItems:'center', borderRadius:7}}>
-                <Text style={{ fontWeight:"800", color:'white'}}>+</Text>
+              <TouchableOpacity
+                onPress={() => {
+                  tambah();
+                }}
+                style={{
+                  height: 20,
+                  width: 20,
+                  backgroundColor: 'green',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  borderRadius: 7,
+                }}>
+                <Text style={{fontWeight: '800', color: 'white'}}>+</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={{height:20 , width:20, backgroundColor:'green', justifyContent:'center', alignItems:'center',borderRadius:7}}>
-                <Text style={{ fontWeight:"800", color:'white'}}>-</Text>
+              <TouchableOpacity
+                onPress={() => {
+                  kurang();
+                }}
+                style={{
+                  height: 20,
+                  width: 20,
+                  backgroundColor: 'green',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  borderRadius: 7,
+                }}>
+                <Text style={{fontWeight: '800', color: 'white'}}>-</Text>
               </TouchableOpacity>
-              <TouchableOpacity onPress={()=>{removeItem(index)}}>
-
-              <Image source={require('../../images/Delete.png')}/>
+              <TouchableOpacity
+                onPress={() => {
+                  removeItem(index);
+                }}>
+                <Image source={require('../../images/Delete.png')} />
               </TouchableOpacity>
             </View>
           );
@@ -146,12 +179,10 @@ const Keranjang = () => {
             Total Harga :
           </Text>
           <Text style={{fontSize: 20, fontWeight: 'bold', color: '#000'}}>
-         {'Rp.'+ numberFormat(getTotal())}
-
+            {'Rp.' + numberFormat(getTotal())}
           </Text>
-
         </View>
-        
+
         <ComButton
           title={'Check Out'}
           onPress={() => {

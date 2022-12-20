@@ -90,7 +90,7 @@ const Beranda = () => {
           backgroundColor: '#f3c10d',
           padding: 30,
         }}>
-        <Image source={require('../../images/slider.png')} />
+        <Image source={require('../../images/banner.png')} style={{width:"100%", height:150}}/>
       </View>
       <Text
         style={{
