@@ -22,7 +22,10 @@ const SignUp2 = () => {
       .collection('Users')
       .doc(auth().currentUser.uid)
       .update({
-        age: 31,
+        phone: phone,
+        alamat: alamat,
+        provinsi: provinsi,
+        kabupaten: kabupaten,
       })
       .then(() => {
         console.log('User updated!');
@@ -86,7 +89,7 @@ const SignUp2 = () => {
             title={'Sign Up'}
             bgColor={'#f3c10d'}
             textColor={'#ffff'}
-            onPress={checkuser}
+            onPress={update}
           />
         </View>
       </View>
